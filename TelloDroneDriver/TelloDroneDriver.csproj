@@ -44,6 +44,7 @@
     <Compile Include="Command\ControlCommand.cs" />
     <Compile Include="Command\ReadCommand.cs" />
     <Compile Include="Command\SetCommand.cs" />
+    <Compile Include="DroneConstants.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Functions\BaseDroneFunction.cs" />
     <Compile Include="Functions\DroneConnection.cs" />
