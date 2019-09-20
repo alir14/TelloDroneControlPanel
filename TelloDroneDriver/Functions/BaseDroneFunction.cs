@@ -89,7 +89,7 @@ namespace TelloDroneDriver.Functions
 
                 await ControlManager.Instance.DroneUdpClient.SendAsync(commandText, commandText.Length);
 
-                ControlManager.Instance.DroneUdpClient.Client.ReceiveTimeout = 5000;
+                //ControlManager.Instance.DroneUdpClient.Client.ReceiveTimeout = 5000;
 
                 var responseMessageBytes = await ControlManager.Instance.DroneUdpClient.ReceiveAsync();
 
