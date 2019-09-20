@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using TelloDroneDriver.Command;
 using TelloDroneDriver.Manager;
@@ -16,6 +17,8 @@ namespace TelloDroneDriver.Functions
                 Console.WriteLine($"Initialize ....");
 
                 var response = ExecuteCommand(ControlCommand.Command);
+
+                Thread.Sleep(ControlManager.Instance.CommandDelayList[DroneConstants.COMMAND]);
 
                 return response;
             }
@@ -52,6 +55,8 @@ namespace TelloDroneDriver.Functions
 
                 var response = await ExecuteCommandAsync(ControlCommand.Command);
 
+                await Task.Delay(ControlManager.Instance.CommandDelayList[DroneConstants.COMMAND]);
+
                 return response;
             }
             catch (Exception ex)
@@ -78,7 +83,6 @@ namespace TelloDroneDriver.Functions
                 return DroneResponse.FAIL;
             }
         }
-
 
         protected DroneResponse ExecuteCommand(string command)
         {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using TelloDroneDriver.Command;
 using TelloDroneDriver.Manager;
@@ -16,6 +17,8 @@ namespace TelloDroneDriver.Functions
                     var command = ControlCommand.Up(x);
 
                     MoveDrone(command);
+
+                    Thread.Sleep(ControlManager.Instance.CommandDelayList[DroneConstants.UP]);
                 }
             }
             catch (Exception ex)
@@ -33,6 +36,8 @@ namespace TelloDroneDriver.Functions
                     var command = ControlCommand.Down(x);
 
                     MoveDrone(command);
+
+                    Thread.Sleep(ControlManager.Instance.CommandDelayList[DroneConstants.DOWN]);
                 }
             }
             catch (Exception ex)
@@ -50,6 +55,8 @@ namespace TelloDroneDriver.Functions
                     var command = ControlCommand.Left(x);
 
                     MoveDrone(command);
+
+                    Thread.Sleep(ControlManager.Instance.CommandDelayList[DroneConstants.LEFT]);
                 }
             }
             catch (Exception ex)
@@ -67,6 +74,8 @@ namespace TelloDroneDriver.Functions
                     var command = ControlCommand.Right(x);
 
                     MoveDrone(command);
+
+                    Thread.Sleep(ControlManager.Instance.CommandDelayList[DroneConstants.RIGHT]);
                 }
             }
             catch (Exception ex)
@@ -84,6 +93,8 @@ namespace TelloDroneDriver.Functions
                     var command = ControlCommand.Forward(x);
 
                     MoveDrone(command);
+
+                    Thread.Sleep(ControlManager.Instance.CommandDelayList[DroneConstants.FORWARD]);
                 }
             }
             catch (Exception ex)
@@ -102,6 +113,8 @@ namespace TelloDroneDriver.Functions
                     var command = ControlCommand.Back(x);
 
                     MoveDrone(command);
+
+                    Thread.Sleep(ControlManager.Instance.CommandDelayList[DroneConstants.BACK]);
                 }
             }
             catch (Exception ex)
@@ -119,6 +132,9 @@ namespace TelloDroneDriver.Functions
                     var command = ControlCommand.Up(x);
 
                     await MoveDroneAsync(command);
+
+                    await Task.Delay(ControlManager.Instance.CommandDelayList[DroneConstants.UP]);
+
                 }
             }
             catch (Exception ex)
@@ -136,6 +152,8 @@ namespace TelloDroneDriver.Functions
                     var command = ControlCommand.Down(x);
 
                     await MoveDroneAsync(command);
+
+                    await Task.Delay(ControlManager.Instance.CommandDelayList[DroneConstants.DOWN]);
                 }
             }
             catch (Exception ex)
@@ -153,6 +171,8 @@ namespace TelloDroneDriver.Functions
                     var command = ControlCommand.Left(x);
 
                     await MoveDroneAsync(command);
+
+                    await Task.Delay(ControlManager.Instance.CommandDelayList[DroneConstants.LEFT]);
                 }
             }
             catch (Exception ex)
@@ -170,6 +190,8 @@ namespace TelloDroneDriver.Functions
                     var command = ControlCommand.Right(x);
 
                     await MoveDroneAsync(command);
+
+                    await Task.Delay(ControlManager.Instance.CommandDelayList[DroneConstants.RIGHT]);
                 }
             }
             catch (Exception ex)
@@ -187,6 +209,8 @@ namespace TelloDroneDriver.Functions
                     var command = ControlCommand.Forward(x);
 
                     await MoveDroneAsync(command);
+
+                    await Task.Delay(ControlManager.Instance.CommandDelayList[DroneConstants.FORWARD]);
                 }
             }
             catch (Exception ex)
@@ -205,6 +229,9 @@ namespace TelloDroneDriver.Functions
                     var command = ControlCommand.Back(x);
 
                     await MoveDroneAsync(command);
+
+                    await Task.Delay(ControlManager.Instance.CommandDelayList[DroneConstants.BACK]);
+
                 }
             }
             catch (Exception ex)
