@@ -5,7 +5,7 @@ namespace TelloDroneDriver.Functions
 {
     public class DroneConnection : BaseDroneFeature, IDisposable
     {
-        public async Task<DroneResponse> ConnectWithCommand()
+        public DroneResponse ConnectWithCommand()
         {
             try
             {
