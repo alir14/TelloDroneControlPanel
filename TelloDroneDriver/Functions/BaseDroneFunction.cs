@@ -44,6 +44,42 @@ namespace TelloDroneDriver.Functions
             }
         }
 
+        public async Task<DroneResponse> InitializeToSendCommndAsync()
+        {
+            try
+            {
+                Console.WriteLine($"Initialize ....");
+
+                var response = await ExecuteCommandAsync(ControlCommand.Command);
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return DroneResponse.FAIL;
+            }
+
+        }
+
+        public async Task<DroneResponse> EmergencyStopAsync()
+        {
+            try
+            {
+                Console.WriteLine($"Stop all acrion: EmergencyStop ....");
+
+                var response = await ExecuteCommandAsync(ControlCommand.Emergency);
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return DroneResponse.FAIL;
+            }
+        }
+
+
         protected DroneResponse ExecuteCommand(string command)
         {
             try

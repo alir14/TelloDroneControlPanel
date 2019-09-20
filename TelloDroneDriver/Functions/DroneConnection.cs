@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using TelloDroneDriver.Manager;
 
 namespace TelloDroneDriver.Functions
@@ -19,6 +20,35 @@ namespace TelloDroneDriver.Functions
                 Console.WriteLine($"connected: ttl: {ControlManager.Instance.DroneUdpClient.Ttl}");
 
                 var initResponse = InitializeToSendCommnd();
+
+                if (initResponse == DroneResponse.OK)
+                    ControlManager.Instance.IsConnected = true;
+                else
+                    ControlManager.Instance.IsConnected = false;
+
+                return initResponse;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return DroneResponse.FAIL;
+            }
+        }
+
+        public async Task<DroneResponse> ConnectWithCommandAsync()
+        {
+            try
+            {
+                if (ControlManager.Instance.DroneUdpClient == null)
+                    return DroneResponse.FAIL;
+
+                Console.WriteLine($"connecting ....");
+
+                ControlManager.Instance.DroneUdpClient.Connect(ControlManager.Instance.DroneEndPoint);
+
+                Console.WriteLine($"connected: ttl: {ControlManager.Instance.DroneUdpClient.Ttl}");
+
+                var initResponse = await InitializeToSendCommndAsync();
 
                 if (initResponse == DroneResponse.OK)
                     ControlManager.Instance.IsConnected = true;
