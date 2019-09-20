@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29230.47
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelloDroneControlPanel", "TelloDroneControlPanel\TelloDroneControlPanel.csproj", "{BAE51D86-7E9C-4E67-AC34-0E8458E70B39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelloDroneDriver", "TelloDroneDriver\TelloDroneDriver.csproj", "{D2D77A94-DF19-486D-B2C1-A543E2915DCF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BAE51D86-7E9C-4E67-AC34-0E8458E70B39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAE51D86-7E9C-4E67-AC34-0E8458E70B39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAE51D86-7E9C-4E67-AC34-0E8458E70B39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAE51D86-7E9C-4E67-AC34-0E8458E70B39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2D77A94-DF19-486D-B2C1-A543E2915DCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2D77A94-DF19-486D-B2C1-A543E2915DCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2D77A94-DF19-486D-B2C1-A543E2915DCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2D77A94-DF19-486D-B2C1-A543E2915DCF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6091D06B-DB66-458D-9A85-55433D34A724}
+	EndGlobalSection
+EndGlobal
