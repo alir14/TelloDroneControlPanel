@@ -26,4 +26,13 @@ namespace TelloDroneDriver
         TakeOff,
         Land
     }
+
+    public enum CommandStatuEnum
+    {
+        Noen,
+        Pending,
+        Done,
+        Ignored,
+        Error
+    }
 }

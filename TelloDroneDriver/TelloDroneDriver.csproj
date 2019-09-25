@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandPipeLine.cs" />
     <Compile Include="Command\ControlCommand.cs" />
     <Compile Include="Command\ReadCommand.cs" />
     <Compile Include="Command\SetCommand.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="Functions\DroneStreamingFunction.cs" />
     <Compile Include="Functions\DronTaxiFunction.cs" />
     <Compile Include="Manager\ControlManager.cs" />
+    <Compile Include="Model\CommandModel.cs" />
     <Compile Include="Model\Coordinate.cs" />
     <Compile Include="Model\RCParameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
