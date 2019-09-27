@@ -2,7 +2,7 @@
 
 namespace TelloDroneDriver.Command
 {
-    public static class SetCommand
+    internal static class SetCommand
     {
         public static string SetSpeed(int x)
         {

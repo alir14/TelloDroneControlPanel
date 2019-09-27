@@ -6,7 +6,13 @@ namespace TelloDroneDriver.Model
     {
         public int Id { get; set; }
 
-        public string Command { get; set; }
+        public DroneCommandEnum Command { get; set; }
+
+        public Coordinate Coordinate { get; set; } = new Coordinate();
+
+        public Coordinate CurveCoordinate { get; set; } = new Coordinate();
+
+        public int SpeedValue { get; set; }
 
         public CommandStatuEnum CommandStatus { get; set; }
 

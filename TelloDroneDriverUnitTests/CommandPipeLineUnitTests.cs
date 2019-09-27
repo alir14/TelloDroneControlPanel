@@ -15,7 +15,7 @@ namespace TelloDroneDriverUnitTests
             var dummyModel = new CommandModel()
             {
                 Id = -1,
-                Command = ControlCommand.Command,
+                Command = DroneCommandEnum.TAKEOFF,
                 CommandStatus = CommandStatuEnum.Pending,
                 CommandType = CommandMode.CommandMode
             };
@@ -27,20 +27,13 @@ namespace TelloDroneDriverUnitTests
             var item = CommandPipeLine.Instance.CommandList[0];
             Assert.IsTrue(item.Id > 0);
             Assert.IsTrue(item.Time != TimeSpan.Zero);
-            Assert.IsFalse(string.IsNullOrEmpty(item.Command));
+            Assert.IsNotNull(item.Command);
         }
 
         [TestMethod]
         public void AddCommandToPipeLine_InValidCommand_CommandListDoesnotHaveItem()
         {
             CommandModel dummyModel = null;
-
-            CommandPipeLine.Instance.AddCommandToPipeLine(dummyModel);
-
-            dummyModel = new CommandModel()
-            {
-                Command = string.Empty,
-            };
 
             CommandPipeLine.Instance.AddCommandToPipeLine(dummyModel);
 
@@ -53,7 +46,7 @@ namespace TelloDroneDriverUnitTests
         {
             var dummyModel = new CommandModel()
             {
-                Command = ControlCommand.Command,
+                Command = DroneCommandEnum.TAKEOFF,
                 CommandStatus = CommandStatuEnum.Pending,
                 CommandType = CommandMode.CommandMode
             };
@@ -77,7 +70,7 @@ namespace TelloDroneDriverUnitTests
         {
             var dummyModel = new CommandModel()
             {
-                Command = ControlCommand.Command,
+                Command = DroneCommandEnum.TAKEOFF,
                 CommandStatus = CommandStatuEnum.Pending,
                 CommandType = CommandMode.CommandMode
             };
@@ -104,7 +97,7 @@ namespace TelloDroneDriverUnitTests
         {
             var dummyModel = new CommandModel()
             {
-                Command = ControlCommand.Command,
+                Command = DroneCommandEnum.TAKEOFF,
                 CommandStatus = CommandStatuEnum.Pending,
                 CommandType = CommandMode.CommandMode
             };
@@ -123,7 +116,7 @@ namespace TelloDroneDriverUnitTests
         {
             var dummyModel = new CommandModel()
             {
-                Command = ControlCommand.Command,
+                Command = DroneCommandEnum.TAKEOFF,
                 CommandStatus = CommandStatuEnum.Pending,
                 CommandType = CommandMode.CommandMode
             };
@@ -139,14 +132,14 @@ namespace TelloDroneDriverUnitTests
             var invalidModel = new CommandModel()
             {
                 Id = 100000,
-                Command = ControlCommand.Command,
+                Command = DroneCommandEnum.TAKEOFF,
                 CommandStatus = CommandStatuEnum.Done,
                 CommandType = CommandMode.Read
             };
 
             var dummyModel = new CommandModel()
             {
-                Command = ControlCommand.Command,
+                Command = DroneCommandEnum.TAKEOFF,
                 CommandStatus = CommandStatuEnum.Pending,
                 CommandType = CommandMode.CommandMode
             };

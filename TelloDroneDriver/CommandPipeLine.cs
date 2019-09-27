@@ -56,8 +56,7 @@ namespace TelloDroneDriver
         {
             try
             {
-                if (commandList != null && command != null 
-                    && !string.IsNullOrEmpty(command.Command))
+                if (commandList != null && command != null)
                 {
                     command.Id = GetUiqueId();
                     command.Time = DateTime.UtcNow.TimeOfDay;
@@ -79,6 +78,25 @@ namespace TelloDroneDriver
                     var index = commandList.FindIndex(x => x.Id == command.Id);
                     if (index > -1)
                         commandList.RemoveAt(index);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        public void DropCommandFromPipeLine(CommandModel command, CommandStatuEnum status)
+        {
+            try
+            {
+                if (commandList != null)
+                {
+                    var index = commandList.FindIndex(x => x.Id == command.Id);
+                    if (index > -1)
+                    {
+                        commandList[index].CommandStatus = status;
+                    }
                 }
             }
             catch (Exception ex)

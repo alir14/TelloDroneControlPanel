@@ -2,7 +2,7 @@
 
 namespace TelloDroneDriver.Command
 {
-    public static class ControlCommand
+    internal static class ControlCommand
     {
         public const string Command = "command";
         public const string TakeOff = "takeoff";

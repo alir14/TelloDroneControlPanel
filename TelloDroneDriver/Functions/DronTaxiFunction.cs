@@ -5,38 +5,46 @@ using TelloDroneDriver.Manager;
 
 namespace TelloDroneDriver.Functions
 {
-    public class DronTaxiFeature : BaseDroneFeature
+    internal class DronTaxiFeature : BaseDroneFeature
     {
-        public void TakeOff()
+        public DroneResponse TakeOff()
         {
             var response = DroneAction(ControlCommand.TakeOff);
 
             if (response == DroneResponse.OK)
                 ControlManager.Instance.FlightStatus = CurrentStatus.TakeOff;
+
+            return response;
         }
 
-        public void AutoLand()
+        public DroneResponse AutoLand()
         {
             var response = DroneAction(ControlCommand.Land);
 
             if (response == DroneResponse.OK)
                 ControlManager.Instance.FlightStatus = CurrentStatus.Land;
+
+            return response;
         }
 
-        public async Task TakeOffAsync()
+        public async Task<DroneResponse> TakeOffAsync()
         {
             var response = await DroneActionAsync(ControlCommand.TakeOff);
 
             if (response == DroneResponse.OK)
                 ControlManager.Instance.FlightStatus = CurrentStatus.TakeOff;
+
+            return response;
         }
 
-        public async Task AutoLandAsync()
+        public async Task<DroneResponse> AutoLandAsync()
         {
             var response = await DroneActionAsync(ControlCommand.Land);
 
             if (response == DroneResponse.OK)
                 ControlManager.Instance.FlightStatus = CurrentStatus.Land;
+
+            return response;
         }
 
         private DroneResponse DroneAction(string command)

@@ -52,6 +52,7 @@
     <Compile Include="Functions\DroneMovementFunction.cs" />
     <Compile Include="Functions\DroneStreamingFunction.cs" />
     <Compile Include="Functions\DronTaxiFunction.cs" />
+    <Compile Include="Manager\CommandExecuteManager.cs" />
     <Compile Include="Manager\ControlManager.cs" />
     <Compile Include="Model\CommandModel.cs" />
     <Compile Include="Model\Coordinate.cs" />

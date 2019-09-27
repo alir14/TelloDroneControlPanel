@@ -3,98 +3,25 @@ using System.Threading;
 using System.Threading.Tasks;
 using TelloDroneDriver.Command;
 using TelloDroneDriver.Manager;
+using TelloDroneDriver.Model;
 
 namespace TelloDroneDriver.Functions
 {
-    public class DroneMovementFeature : BaseDroneFeature
+    internal class DroneMovementFeature : BaseDroneFeature
     {
-        public void MoveUp(int x)
+        public DroneResponse MoveUp(Coordinate coordinate)
         {
             try
             {
-                if (ValidateMovementRange(x))
+                if (ValidateMovementRange(coordinate.Z))
                 {
-                    var command = ControlCommand.Up(x);
+                    var command = ControlCommand.Up(coordinate.Z);
 
-                    MoveDrone(command);
+                    var response = MoveDrone(command);
 
-                    Thread.Sleep(ControlManager.Instance.CommandDelayList[DroneConstants.UP]);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
+                    Thread.Sleep(base.CommandDelayList[DroneConstants.UP]);
 
-        public void MoveDown(int x)
-        {
-            try
-            {
-                if (ValidateMovementRange(x))
-                {
-                    var command = ControlCommand.Down(x);
-
-                    MoveDrone(command);
-
-                    Thread.Sleep(ControlManager.Instance.CommandDelayList[DroneConstants.DOWN]);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
-        public void MoveLeft(int x)
-        {
-            try
-            {
-                if (ValidateMovementRange(x))
-                {
-                    var command = ControlCommand.Left(x);
-
-                    MoveDrone(command);
-
-                    Thread.Sleep(ControlManager.Instance.CommandDelayList[DroneConstants.LEFT]);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
-        public void MoveRight(int x)
-        {
-            try
-            {
-                if (ValidateMovementRange(x))
-                {
-                    var command = ControlCommand.Right(x);
-
-                    MoveDrone(command);
-
-                    Thread.Sleep(ControlManager.Instance.CommandDelayList[DroneConstants.RIGHT]);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
-        public void MoveForward(int x)
-        {
-            try
-            {
-                if (ValidateMovementRange(x))
-                {
-                    var command = ControlCommand.Forward(x);
-
-                    MoveDrone(command);
-
-                    Thread.Sleep(ControlManager.Instance.CommandDelayList[DroneConstants.FORWARD]);
+                    return response;
                 }
             }
             catch (Exception ex)
@@ -102,115 +29,22 @@ namespace TelloDroneDriver.Functions
                 Console.WriteLine(ex.Message);
             }
 
+            return DroneResponse.FAIL;
         }
 
-        public void MoveBackward(int x)
+        public DroneResponse MoveDown(Coordinate coordinate)
         {
             try
             {
-                if (ValidateMovementRange(x))
+                if (ValidateMovementRange(coordinate.Z))
                 {
-                    var command = ControlCommand.Back(x);
+                    var command = ControlCommand.Down(coordinate.Z);
 
-                    MoveDrone(command);
+                    var response = MoveDrone(command);
 
-                    Thread.Sleep(ControlManager.Instance.CommandDelayList[DroneConstants.BACK]);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
+                    Thread.Sleep(base.CommandDelayList[DroneConstants.DOWN]);
 
-        public async Task MoveUpAsync(int x)
-        {
-            try
-            {
-                if (ValidateMovementRange(x))
-                {
-                    var command = ControlCommand.Up(x);
-
-                    await MoveDroneAsync(command);
-
-                    await Task.Delay(ControlManager.Instance.CommandDelayList[DroneConstants.UP]);
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
-        public async Task MoveDownAsync(int x)
-        {
-            try
-            {
-                if (ValidateMovementRange(x))
-                {
-                    var command = ControlCommand.Down(x);
-
-                    await MoveDroneAsync(command);
-
-                    await Task.Delay(ControlManager.Instance.CommandDelayList[DroneConstants.DOWN]);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
-        public async Task MoveLeftAsync(int x)
-        {
-            try
-            {
-                if (ValidateMovementRange(x))
-                {
-                    var command = ControlCommand.Left(x);
-
-                    await MoveDroneAsync(command);
-
-                    await Task.Delay(ControlManager.Instance.CommandDelayList[DroneConstants.LEFT]);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
-        public async Task MoveRightAsync(int x)
-        {
-            try
-            {
-                if (ValidateMovementRange(x))
-                {
-                    var command = ControlCommand.Right(x);
-
-                    await MoveDroneAsync(command);
-
-                    await Task.Delay(ControlManager.Instance.CommandDelayList[DroneConstants.RIGHT]);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
-        public async Task MoveForwardAsync(int x)
-        {
-            try
-            {
-                if (ValidateMovementRange(x))
-                {
-                    var command = ControlCommand.Forward(x);
-
-                    await MoveDroneAsync(command);
-
-                    await Task.Delay(ControlManager.Instance.CommandDelayList[DroneConstants.FORWARD]);
+                    return response;
                 }
             }
             catch (Exception ex)
@@ -218,41 +52,251 @@ namespace TelloDroneDriver.Functions
                 Console.WriteLine(ex.Message);
             }
 
+            return DroneResponse.FAIL;
         }
 
-        public async Task MoveBackwardAsync(int x)
+        public DroneResponse MoveLeft(Coordinate coordinate)
         {
             try
             {
-                if (ValidateMovementRange(x))
+                if (ValidateMovementRange(coordinate.X))
                 {
-                    var command = ControlCommand.Back(x);
+                    var command = ControlCommand.Left(coordinate.X);
 
-                    await MoveDroneAsync(command);
+                    var response = MoveDrone(command);
 
-                    await Task.Delay(ControlManager.Instance.CommandDelayList[DroneConstants.BACK]);
+                    Thread.Sleep(base.CommandDelayList[DroneConstants.LEFT]);
 
+                    return response;
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
+
+            return DroneResponse.FAIL;
         }
 
-        private bool ValidateMovementRange(int x)
+        public DroneResponse MoveRight(Coordinate coordinate)
         {
-            if (x > 20 && x < 500)
+            try
+            {
+                if (ValidateMovementRange(coordinate.X))
+                {
+                    var command = ControlCommand.Right(coordinate.X);
+
+                    var response = MoveDrone(command);
+
+                    Thread.Sleep(base.CommandDelayList[DroneConstants.RIGHT]);
+
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return DroneResponse.FAIL;
+        }
+
+        public DroneResponse MoveForward(Coordinate coordinate)
+        {
+            try
+            {
+                if (ValidateMovementRange(coordinate.Y))
+                {
+                    var command = ControlCommand.Forward(coordinate.Y);
+
+                    var response = MoveDrone(command);
+
+                    Thread.Sleep(base.CommandDelayList[DroneConstants.FORWARD]);
+
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return DroneResponse.FAIL;
+        }
+
+        public DroneResponse MoveBackward(Coordinate coordinate)
+        {
+            try
+            {
+                if (ValidateMovementRange(coordinate.Y))
+                {
+                    var command = ControlCommand.Back(coordinate.Y);
+
+                    var response = MoveDrone(command);
+
+                    Thread.Sleep(base.CommandDelayList[DroneConstants.BACK]);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return DroneResponse.FAIL;
+        }
+
+        public async Task<DroneResponse> MoveUpAsync(Coordinate coordinate)
+        {
+            try
+            {
+                if (ValidateMovementRange(coordinate.Z))
+                {
+                    var command = ControlCommand.Up(coordinate.Z);
+
+                    var response = await MoveDroneAsync(command);
+
+                    await Task.Delay(base.CommandDelayList[DroneConstants.UP]);
+
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return DroneResponse.FAIL;
+        }
+
+        public async Task<DroneResponse> MoveDownAsync(Coordinate coordinate)
+        {
+            try
+            {
+                if (ValidateMovementRange(coordinate.Z))
+                {
+                    var command = ControlCommand.Down(coordinate.Z);
+
+                    var response = await MoveDroneAsync(command);
+
+                    await Task.Delay(base.CommandDelayList[DroneConstants.DOWN]);
+
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return DroneResponse.FAIL;
+        }
+
+        public async Task<DroneResponse> MoveLeftAsync(Coordinate coordinate)
+        {
+            try
+            {
+                if (ValidateMovementRange(coordinate.X))
+                {
+                    var command = ControlCommand.Left(coordinate.X);
+
+                    var response = await MoveDroneAsync(command);
+
+                    await Task.Delay(base.CommandDelayList[DroneConstants.LEFT]);
+
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return DroneResponse.FAIL;
+        }
+
+        public async Task<DroneResponse> MoveRightAsync(Coordinate coordinate)
+        {
+            try
+            {
+                if (ValidateMovementRange(coordinate.X))
+                {
+                    var command = ControlCommand.Right(coordinate.X);
+
+                    var response = await MoveDroneAsync(command);
+
+                    await Task.Delay(base.CommandDelayList[DroneConstants.RIGHT]);
+
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return DroneResponse.FAIL;
+        }
+
+        public async Task<DroneResponse> MoveForwardAsync(Coordinate coordinate)
+        {
+            try
+            {
+                if (ValidateMovementRange(coordinate.Y))
+                {
+                    var command = ControlCommand.Forward(coordinate.Y);
+
+                    var response = await MoveDroneAsync(command);
+
+                    await Task.Delay(base.CommandDelayList[DroneConstants.FORWARD]);
+
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return DroneResponse.FAIL;
+        }
+
+        public async Task<DroneResponse> MoveBackwardAsync(Coordinate coordinate)
+        {
+            try
+            {
+                if (ValidateMovementRange(coordinate.Y))
+                {
+                    var command = ControlCommand.Back(coordinate.Y);
+
+                    var response = await MoveDroneAsync(command);
+
+                    await Task.Delay(base.CommandDelayList[DroneConstants.BACK]);
+
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return DroneResponse.FAIL;
+        }
+
+        private bool ValidateMovementRange(int value)
+        {
+
+            if (value > 20 && value < 500)
                 return true;
             else
             {
-                Console.WriteLine($"value is out of range {x}");
+                Console.WriteLine($"value is out of range {value}");
 
                 return false;
             }
         }
 
-        private void MoveDrone(string command)
+        private DroneResponse MoveDrone(string command)
         {
             Console.WriteLine($" Connection: {ControlManager.Instance.IsConnected} & Status: {ControlManager.Instance.FlightStatus}");
 
@@ -262,10 +306,14 @@ namespace TelloDroneDriver.Functions
                 var response = ExecuteCommand(command);
 
                 Console.WriteLine(response);
+
+                return response;
             }
+
+            return DroneResponse.FAIL;
         }
 
-        private async Task MoveDroneAsync(string command)
+        private async Task<DroneResponse> MoveDroneAsync(string command)
         {
             Console.WriteLine($" Connection: {ControlManager.Instance.IsConnected} & Status: {ControlManager.Instance.FlightStatus}");
 
@@ -275,7 +323,11 @@ namespace TelloDroneDriver.Functions
                 var response = await ExecuteCommandAsync(command);
 
                 Console.WriteLine(response);
+
+                return response;
             }
+
+            return DroneResponse.FAIL;
         }
 
     }
