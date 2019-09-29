@@ -7,3 +7,5 @@
 /TelloDroneControlPanel/obj
 /TelloDroneDriver/bin
 /TelloDroneDriver/obj
+/packages
+/TelloDroneDriverUnitTests/obj/Debug
