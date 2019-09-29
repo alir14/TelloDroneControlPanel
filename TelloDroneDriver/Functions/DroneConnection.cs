@@ -4,7 +4,7 @@ using TelloDroneDriver.Manager;
 
 namespace TelloDroneDriver.Functions
 {
-    public class DroneConnection : BaseDroneFeature, IDisposable
+    internal class DroneConnection : BaseDroneFeature, IDisposable
     {
         public DroneResponse ConnectWithCommand()
         {

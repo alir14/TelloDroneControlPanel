@@ -20,10 +20,40 @@ namespace TelloDroneDriver
         Set
     }
 
+    public enum DroneCommandEnum : short
+    {
+        COMMAND,
+        TAKEOFF,
+        LAND,
+        UP,
+        DOWN,
+        LEFT,
+        RIGHT,
+        GO,
+        FORWARD,
+        BACK,
+        CW,
+        CCW,
+        FLIP,
+        SPEED,
+        BATTERY_STATE,
+        SPEED_STATE,
+        TIME_STATE
+    }
+
     public enum CurrentStatus : short
     {
         None,
         TakeOff,
         Land
+    }
+
+    public enum CommandStatuEnum
+    {
+        None,
+        Pending,
+        Done,
+        Ignored,
+        Error
     }
 }

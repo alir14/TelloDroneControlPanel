@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Text;
 using System.Threading;
@@ -8,8 +9,21 @@ using TelloDroneDriver.Manager;
 
 namespace TelloDroneDriver.Functions
 {
-    public abstract class BaseDroneFeature
+    internal abstract class BaseDroneFeature
     {
+        private Dictionary<string, int> delayCommandsList = new Dictionary<string, int>();
+
+        public Dictionary<string, int> CommandDelayList
+        {
+            get
+            {
+                if (delayCommandsList.Count == 0)
+                    SetCommandDelayValues();
+
+                return delayCommandsList;
+            }
+        }
+
         public DroneResponse InitializeToSendCommnd()
         {
             try
@@ -18,7 +32,7 @@ namespace TelloDroneDriver.Functions
 
                 var response = ExecuteCommand(ControlCommand.Command);
 
-                Thread.Sleep(ControlManager.Instance.CommandDelayList[DroneConstants.COMMAND]);
+                Thread.Sleep(CommandDelayList[DroneConstants.COMMAND]);
 
                 return response;
             }
@@ -55,7 +69,7 @@ namespace TelloDroneDriver.Functions
 
                 var response = await ExecuteCommandAsync(ControlCommand.Command);
 
-                await Task.Delay(ControlManager.Instance.CommandDelayList[DroneConstants.COMMAND]);
+                await Task.Delay(CommandDelayList[DroneConstants.COMMAND]);
 
                 return response;
             }
@@ -146,6 +160,27 @@ namespace TelloDroneDriver.Functions
             {
                 throw;
             }
+        }
+
+        private void SetCommandDelayValues()
+        {
+            delayCommandsList.Add(DroneConstants.COMMAND, 500);
+            delayCommandsList.Add(DroneConstants.TAKEOFF, 5000);
+            delayCommandsList.Add(DroneConstants.LAND, 5000);
+            delayCommandsList.Add(DroneConstants.UP, 7000);
+            delayCommandsList.Add(DroneConstants.DOWN, 7000);
+            delayCommandsList.Add(DroneConstants.LEFT, 5000);
+            delayCommandsList.Add(DroneConstants.RIGHT, 5000);
+            delayCommandsList.Add(DroneConstants.GO, 7000);
+            delayCommandsList.Add(DroneConstants.FORWARD, 5000);
+            delayCommandsList.Add(DroneConstants.BACK, 5000);
+            delayCommandsList.Add(DroneConstants.CW, 5000);
+            delayCommandsList.Add(DroneConstants.CCW, 5000);
+            delayCommandsList.Add(DroneConstants.FLIP, 3000);
+            delayCommandsList.Add(DroneConstants.SPEED, 3000);
+            delayCommandsList.Add(DroneConstants.BATTERY_STATE, 500);
+            delayCommandsList.Add(DroneConstants.SPEED_STATE, 500);
+            delayCommandsList.Add(DroneConstants.TIME_STATE, 500);
         }
     }
 }

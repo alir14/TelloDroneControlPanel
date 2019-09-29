@@ -1,6 +1,6 @@
 ﻿namespace TelloDroneDriver.Command
 {
-    public class ReadCommand
+    internal class ReadCommand
     {
         public const string GetSpeed = "speed?";
         public const string GetBattery = "battery?";
