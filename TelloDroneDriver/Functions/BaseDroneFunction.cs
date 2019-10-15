@@ -24,7 +24,7 @@ namespace TelloDroneDriver.Functions
             }
         }
 
-        public DroneResponse InitializeToSendCommnd()
+        public DroneResponse InitializeToSendCommand()
         {
             try
             {
@@ -110,9 +110,9 @@ namespace TelloDroneDriver.Functions
 
                 //ControlManager.Instance.DroneUdpClient.Client.ReceiveTimeout = 5000;
 
-                var _recieverEndpoint = new IPEndPoint(IPAddress.Any, 0);
+                var receiverEndpoint = new IPEndPoint(IPAddress.Any, 0);
 
-                var responseMessageBytes = ControlManager.Instance.DroneUdpClient.Receive(ref _recieverEndpoint);
+                var responseMessageBytes = ControlManager.Instance.DroneUdpClient.Receive(ref receiverEndpoint);
 
                 var droneResponse = Encoding.ASCII.GetString(responseMessageBytes);
 

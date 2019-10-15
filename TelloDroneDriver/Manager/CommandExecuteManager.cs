@@ -9,7 +9,7 @@ namespace TelloDroneDriver.Manager
     public class CommandExecuteManager
     {
 
-        private readonly DroneConnection _baseDroneFeature = new DroneConnection();
+        private readonly DroneConnection _droneConnection = new DroneConnection();
         private readonly DronTaxiFeature _taxiFeature = new DronTaxiFeature();
         private readonly DroneMovementFeature _movement = new DroneMovementFeature();
 
@@ -42,7 +42,7 @@ namespace TelloDroneDriver.Manager
         {
             try
             {
-                var response = _baseDroneFeature.ConnectWithCommand();
+                var response = _droneConnection.ConnectWithCommand();
 
                 if(response == DroneResponse.FAIL)
                 {
@@ -60,7 +60,7 @@ namespace TelloDroneDriver.Manager
                         if(item != null)
                         {
                             // 1) execute it 
-                            response = await ExecuteCommand(item);
+                            response = await ProcessItemInPipeLine(item);
 
                             if (response == DroneResponse.OK)
                                 CommandPipeLine.Instance.DropCommandFromPipeLine(item, CommandStatuEnum.Done);
@@ -78,7 +78,7 @@ namespace TelloDroneDriver.Manager
             
         }
 
-        private async Task<DroneResponse> ExecuteCommand(CommandModel item)
+        private async Task<DroneResponse> ProcessItemInPipeLine(CommandModel item)
         {
             switch (item.Command)
             {

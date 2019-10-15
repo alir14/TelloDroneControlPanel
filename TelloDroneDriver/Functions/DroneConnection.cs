@@ -19,12 +19,9 @@ namespace TelloDroneDriver.Functions
 
                 Console.WriteLine($"connected: ttl: {ControlManager.Instance.DroneUdpClient.Ttl}");
 
-                var initResponse = InitializeToSendCommnd();
+                var initResponse = InitializeToSendCommand();
 
-                if (initResponse == DroneResponse.OK)
-                    ControlManager.Instance.IsConnected = true;
-                else
-                    ControlManager.Instance.IsConnected = false;
+                ControlManager.Instance.IsConnected = initResponse == DroneResponse.OK;
 
                 return initResponse;
             }
@@ -50,10 +47,7 @@ namespace TelloDroneDriver.Functions
 
                 var initResponse = await InitializeToSendCommndAsync();
 
-                if (initResponse == DroneResponse.OK)
-                    ControlManager.Instance.IsConnected = true;
-                else
-                    ControlManager.Instance.IsConnected = false;
+                ControlManager.Instance.IsConnected = initResponse == DroneResponse.OK;
 
                 return initResponse;
             }

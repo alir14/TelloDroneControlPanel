@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using TelloDroneDriver.Command;
 using TelloDroneDriver.Manager;
@@ -14,6 +15,8 @@ namespace TelloDroneDriver.Functions
             if (response == DroneResponse.OK)
                 ControlManager.Instance.FlightStatus = CurrentStatus.TakeOff;
 
+            Thread.Sleep(base.CommandDelayList[DroneConstants.TAKEOFF]);
+
             return response;
         }
 
@@ -23,6 +26,8 @@ namespace TelloDroneDriver.Functions
 
             if (response == DroneResponse.OK)
                 ControlManager.Instance.FlightStatus = CurrentStatus.Land;
+
+            Thread.Sleep(base.CommandDelayList[DroneConstants.LAND]);
 
             return response;
         }
@@ -34,6 +39,8 @@ namespace TelloDroneDriver.Functions
             if (response == DroneResponse.OK)
                 ControlManager.Instance.FlightStatus = CurrentStatus.TakeOff;
 
+            await Task.Delay(base.CommandDelayList[DroneConstants.TAKEOFF]);
+
             return response;
         }
 
@@ -43,6 +50,8 @@ namespace TelloDroneDriver.Functions
 
             if (response == DroneResponse.OK)
                 ControlManager.Instance.FlightStatus = CurrentStatus.Land;
+
+            await Task.Delay(base.CommandDelayList[DroneConstants.LAND]);
 
             return response;
         }
