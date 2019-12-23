@@ -1,6 +1,0 @@
-D:\workspace\Tello\TelloDroneControlPanel\TelloDroneDriver\bin\Debug\TelloDroneDriver.dll
-D:\workspace\Tello\TelloDroneControlPanel\TelloDroneDriver\bin\Debug\TelloDroneDriver.pdb
-D:\workspace\Tello\TelloDroneControlPanel\TelloDroneDriver\obj\Debug\TelloDroneDriver.csproj.CoreCompileInputs.cache
-D:\workspace\Tello\TelloDroneControlPanel\TelloDroneDriver\obj\Debug\TelloDroneDriver.dll
-D:\workspace\Tello\TelloDroneControlPanel\TelloDroneDriver\obj\Debug\TelloDroneDriver.pdb
-D:\workspace\Tello\TelloDroneControlPanel\TelloDroneDriver\obj\Debug\TelloDroneDriver.csprojAssemblyReference.cache
