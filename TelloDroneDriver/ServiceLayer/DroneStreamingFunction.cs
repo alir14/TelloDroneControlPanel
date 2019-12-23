@@ -1,4 +1,4 @@
-﻿namespace TelloDroneDriver.Functions
+﻿namespace TelloDroneDriver.ServiceLayer
 {
     internal class DroneStreamingFunction
     {

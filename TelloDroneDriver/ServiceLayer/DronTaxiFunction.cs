@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using TelloDroneDriver.Command;
 using TelloDroneDriver.Manager;
 
-namespace TelloDroneDriver.Functions
+namespace TelloDroneDriver.ServiceLayer
 {
     internal class DronTaxiFeature : BaseDroneFeature
     {

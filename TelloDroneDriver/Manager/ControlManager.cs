@@ -1,6 +1,8 @@
 ﻿using System.Net;
 using System.Net.Sockets;
-using TelloDroneDriver.Functions;
+using System.Threading.Tasks;
+using TelloDroneDriver.Core;
+using TelloDroneDriver.ServiceLayer;
 
 namespace TelloDroneDriver.Manager
 {
@@ -8,19 +10,11 @@ namespace TelloDroneDriver.Manager
     {
         private static volatile ControlManager _instance = null;
         private static object lockObject = new object();
-        private const string _ipAddress = "192.168.10.1";
-        private const int _port = 8889;
+        private readonly IUdpClientWrapper _udpClientWrapper;
 
-        private readonly IPAddress _droneIPAddress;
-        private readonly IPEndPoint _droneEndPoint;
-        private readonly UdpClient _droneClient;
-
-
-        private ControlManager()
+        public ControlManager()
         {
-            _droneIPAddress = IPAddress.Parse(_ipAddress);
-            _droneEndPoint = new IPEndPoint(_droneIPAddress, _port);
-            _droneClient = new UdpClient();
+            _udpClientWrapper = new UdpClientWrapper();
         }
 
         public static ControlManager Instance
@@ -42,13 +36,29 @@ namespace TelloDroneDriver.Manager
             }
         }
 
+        public CurrentStatus FlightStatus { get; set; }
+
         public bool IsConnected { get; set; }
 
-        public UdpClient DroneUdpClient => _droneClient;
+        public DroneResponse Connect()
+        {
+            return _udpClientWrapper.Connect();
+        }
 
-        public IPEndPoint DroneEndPoint => _droneEndPoint;
+        public int Send(byte[] command)
+        {
+            return _udpClientWrapper.Send(command);
+        }
 
-        public CurrentStatus FlightStatus { get; set; }
+        public async Task<int> SendAsync(byte[] command)
+        {
+            return await _udpClientWrapper.SendAsync(command);
+        }
+
+        public byte[] Receive()
+        {
+            return _udpClientWrapper.Rceive();
+        }
 
         public DroneResponse EmergencyStop()
         {

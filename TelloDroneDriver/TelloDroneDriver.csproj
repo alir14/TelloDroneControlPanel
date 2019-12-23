@@ -41,17 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandPipeLine.cs" />
+    <Compile Include="Manager\CommandPipeLine.cs" />
     <Compile Include="Command\ControlCommand.cs" />
     <Compile Include="Command\ReadCommand.cs" />
     <Compile Include="Command\SetCommand.cs" />
+    <Compile Include="Core\UdpClientWrapper.cs" />
     <Compile Include="DroneConstants.cs" />
     <Compile Include="Enums.cs" />
-    <Compile Include="Functions\BaseDroneFunction.cs" />
-    <Compile Include="Functions\DroneConnection.cs" />
-    <Compile Include="Functions\DroneMovementFunction.cs" />
-    <Compile Include="Functions\DroneStreamingFunction.cs" />
-    <Compile Include="Functions\DronTaxiFunction.cs" />
+    <Compile Include="ServiceLayer\BaseDroneFunction.cs" />
+    <Compile Include="ServiceLayer\DroneConnection.cs" />
+    <Compile Include="ServiceLayer\DroneMovementFunction.cs" />
+    <Compile Include="ServiceLayer\DroneStreamingFunction.cs" />
+    <Compile Include="ServiceLayer\DronTaxiFunction.cs" />
     <Compile Include="Manager\CommandExecuteManager.cs" />
     <Compile Include="Manager\ControlManager.cs" />
     <Compile Include="Model\CommandModel.cs" />

@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using TelloDroneDriver.Functions;
+using TelloDroneDriver.ServiceLayer;
 using TelloDroneDriver.Model;
+using System.Threading;
 
 namespace TelloDroneDriver.Manager
 {
     public class CommandExecuteManager
     {
-
         private readonly DroneConnection _baseDroneFeature = new DroneConnection();
         private readonly DronTaxiFeature _taxiFeature = new DronTaxiFeature();
         private readonly DroneMovementFeature _movement = new DroneMovementFeature();
 
         private static CommandExecuteManager instance = null;
         private static volatile object padLock = new object();
+
+        public DroneResponse Response { get; set; } = DroneResponse.FAIL;
 
         private CommandExecuteManager() { }
 
@@ -36,21 +38,21 @@ namespace TelloDroneDriver.Manager
             }
         }
 
-        public bool ExecutionFlag { get; set; } = false;
-
-        public async Task Start()
+        public void Start(object obj)
         {
             try
             {
-                var response = _baseDroneFeature.ConnectWithCommand();
+                CancellationToken token = (CancellationToken)obj;
 
-                if(response == DroneResponse.FAIL)
+                Response = _baseDroneFeature.ConnectWithCommand();
+
+                if(Response == DroneResponse.FAIL)
                 {
                     Console.WriteLine("Cannot connect and send command");
                     return;
                 }
 
-                while (ExecutionFlag)
+                while (!token.IsCancellationRequested)
                 {
                     //get all pending
                     var pendingJobs = CommandPipeLine.Instance.CommandList.Where(x => x.CommandStatus == CommandStatuEnum.Pending);
@@ -60,9 +62,9 @@ namespace TelloDroneDriver.Manager
                         if(item != null)
                         {
                             // 1) execute it 
-                            response = await ExecuteCommand(item);
+                            Response = ExecuteCommandAsync(item).GetAwaiter().GetResult();
 
-                            if (response == DroneResponse.OK)
+                            if (Response == DroneResponse.OK)
                                 CommandPipeLine.Instance.DropCommandFromPipeLine(item, CommandStatuEnum.Done);
                             else
                                 CommandPipeLine.Instance.DropCommandFromPipeLine(item, CommandStatuEnum.Ignored);
@@ -78,7 +80,7 @@ namespace TelloDroneDriver.Manager
             
         }
 
-        private async Task<DroneResponse> ExecuteCommand(CommandModel item)
+        private async Task<DroneResponse> ExecuteCommandAsync(CommandModel item)
         {
             switch (item.Command)
             {

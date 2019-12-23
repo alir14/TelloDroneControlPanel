@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using TelloDroneDriver.Command;
 using TelloDroneDriver.Manager;
 
-namespace TelloDroneDriver.Functions
+namespace TelloDroneDriver.ServiceLayer
 {
     internal abstract class BaseDroneFeature
     {
@@ -26,76 +26,42 @@ namespace TelloDroneDriver.Functions
 
         public DroneResponse InitializeToSendCommnd()
         {
-            try
-            {
-                Console.WriteLine($"Initialize ....");
+            Console.WriteLine($"Initialize ....");
 
-                var response = ExecuteCommand(ControlCommand.Command);
+            var response = ExecuteCommand(ControlCommand.Command);
 
-                Thread.Sleep(CommandDelayList[DroneConstants.COMMAND]);
+            Thread.Sleep(CommandDelayList[DroneConstants.COMMAND]);
 
-                return response;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return DroneResponse.FAIL;
-            }
-
-        }
-
-        public DroneResponse EmergencyStop()
-        {
-            try
-            {
-                Console.WriteLine($"Stop all acrion: EmergencyStop ....");
-
-                var response = ExecuteCommand(ControlCommand.Emergency);
-
-                return response;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return DroneResponse.FAIL;
-            }
+            return response;
         }
 
         public async Task<DroneResponse> InitializeToSendCommndAsync()
         {
-            try
-            {
-                Console.WriteLine($"Initialize ....");
+            Console.WriteLine($"Initialize ....");
 
-                var response = await ExecuteCommandAsync(ControlCommand.Command);
+            var response = await ExecuteCommandAsync(ControlCommand.Command);
 
-                await Task.Delay(CommandDelayList[DroneConstants.COMMAND]);
+            await Task.Delay(CommandDelayList[DroneConstants.COMMAND]);
 
-                return response;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return DroneResponse.FAIL;
-            }
+            return response;
+        }
 
+        public DroneResponse EmergencyStop()
+        {
+            Console.WriteLine($"Stop all acrion: EmergencyStop ....");
+
+            var response = ExecuteCommand(ControlCommand.Emergency);
+
+            return response;
         }
 
         public async Task<DroneResponse> EmergencyStopAsync()
         {
-            try
-            {
-                Console.WriteLine($"Stop all acrion: EmergencyStop ....");
+            Console.WriteLine($"Stop all acrion: EmergencyStop ....");
 
-                var response = await ExecuteCommandAsync(ControlCommand.Emergency);
+            var response = await ExecuteCommandAsync(ControlCommand.Emergency);
 
-                return response;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return DroneResponse.FAIL;
-            }
+            return response;
         }
 
         protected DroneResponse ExecuteCommand(string command)
@@ -106,13 +72,9 @@ namespace TelloDroneDriver.Functions
 
                 var commandText = Encoding.ASCII.GetBytes(command);
 
-                ControlManager.Instance.DroneUdpClient.Send(commandText, commandText.Length);
+                ControlManager.Instance.Send(commandText);
 
-                //ControlManager.Instance.DroneUdpClient.Client.ReceiveTimeout = 5000;
-
-                var _recieverEndpoint = new IPEndPoint(IPAddress.Any, 0);
-
-                var responseMessageBytes = ControlManager.Instance.DroneUdpClient.Receive(ref _recieverEndpoint);
+                var responseMessageBytes = ControlManager.Instance.Receive();
 
                 var droneResponse = Encoding.ASCII.GetString(responseMessageBytes);
 
@@ -141,13 +103,11 @@ namespace TelloDroneDriver.Functions
 
                 var commandText = Encoding.ASCII.GetBytes(command);
 
-                await ControlManager.Instance.DroneUdpClient.SendAsync(commandText, commandText.Length);
+                await ControlManager.Instance.SendAsync(commandText);
 
-                //ControlManager.Instance.DroneUdpClient.Client.ReceiveTimeout = 5000;
+                var responseMessageBytes = ControlManager.Instance.Receive();
 
-                var responseMessageBytes = await ControlManager.Instance.DroneUdpClient.ReceiveAsync();
-
-                var droneResponse = Encoding.ASCII.GetString(responseMessageBytes.Buffer);
+                var droneResponse = Encoding.ASCII.GetString(responseMessageBytes);
 
                 if (!string.IsNullOrEmpty(droneResponse))
                 {
@@ -156,9 +116,10 @@ namespace TelloDroneDriver.Functions
 
                 return DroneResponse.FAIL;
             }
-            catch
+            catch (Exception ex)
             {
-                throw;
+                Console.WriteLine(ex.Message);
+                return DroneResponse.FAIL;
             }
         }
 

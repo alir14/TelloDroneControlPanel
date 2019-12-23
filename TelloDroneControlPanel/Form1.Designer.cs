@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnConnect = new System.Windows.Forms.Button();
+            this.components = new System.ComponentModel.Container();
             this.btnLeft = new System.Windows.Forms.Button();
             this.btnRight = new System.Windows.Forms.Button();
             this.btnUp = new System.Windows.Forms.Button();
@@ -36,19 +36,13 @@
             this.btnTakeOff = new System.Windows.Forms.Button();
             this.btnLand = new System.Windows.Forms.Button();
             this.btnEmergency = new System.Windows.Forms.Button();
-            this.lblConnection = new System.Windows.Forms.Label();
             this.btnCommand = new System.Windows.Forms.Button();
+            this.btnOn = new System.Windows.Forms.Button();
+            this.btnOff = new System.Windows.Forms.Button();
+            this.lblConnection = new System.Windows.Forms.Label();
+            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
-            // 
-            // btnConnect
-            // 
-            this.btnConnect.Location = new System.Drawing.Point(21, 22);
-            this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(115, 42);
-            this.btnConnect.TabIndex = 0;
-            this.btnConnect.Text = "Connect";
-            this.btnConnect.UseVisualStyleBackColor = true;
-            this.btnConnect.Click += new System.EventHandler(this.BtnConnect_Click);
             // 
             // btnLeft
             // 
@@ -120,15 +114,6 @@
             this.btnEmergency.UseVisualStyleBackColor = true;
             this.btnEmergency.Click += new System.EventHandler(this.BtnEmergency_Click);
             // 
-            // lblConnection
-            // 
-            this.lblConnection.AutoSize = true;
-            this.lblConnection.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.lblConnection.Location = new System.Drawing.Point(157, 22);
-            this.lblConnection.Name = "lblConnection";
-            this.lblConnection.Size = new System.Drawing.Size(0, 17);
-            this.lblConnection.TabIndex = 8;
-            // 
             // btnCommand
             // 
             this.btnCommand.Location = new System.Drawing.Point(21, 183);
@@ -139,11 +124,50 @@
             this.btnCommand.UseVisualStyleBackColor = true;
             this.btnCommand.Click += new System.EventHandler(this.BtnCommand_Click);
             // 
+            // btnOn
+            // 
+            this.btnOn.Location = new System.Drawing.Point(21, 244);
+            this.btnOn.Name = "btnOn";
+            this.btnOn.Size = new System.Drawing.Size(75, 23);
+            this.btnOn.TabIndex = 10;
+            this.btnOn.Text = "On";
+            this.btnOn.UseVisualStyleBackColor = true;
+            this.btnOn.Click += new System.EventHandler(this.BtnOn_Click);
+            // 
+            // btnOff
+            // 
+            this.btnOff.Location = new System.Drawing.Point(103, 243);
+            this.btnOff.Name = "btnOff";
+            this.btnOff.Size = new System.Drawing.Size(75, 23);
+            this.btnOff.TabIndex = 11;
+            this.btnOff.Text = "Off";
+            this.btnOff.UseVisualStyleBackColor = true;
+            this.btnOff.Click += new System.EventHandler(this.BtnOff_Click);
+            // 
+            // lblConnection
+            // 
+            this.lblConnection.AutoSize = true;
+            this.lblConnection.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.lblConnection.Location = new System.Drawing.Point(18, 9);
+            this.lblConnection.Name = "lblConnection";
+            this.lblConnection.Size = new System.Drawing.Size(0, 17);
+            this.lblConnection.TabIndex = 8;
+            // 
+            // backgroundWorker
+            // 
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker_DoWork);
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.Timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(685, 296);
+            this.Controls.Add(this.btnOff);
+            this.Controls.Add(this.btnOn);
             this.Controls.Add(this.btnCommand);
             this.Controls.Add(this.lblConnection);
             this.Controls.Add(this.btnEmergency);
@@ -153,7 +177,6 @@
             this.Controls.Add(this.btnUp);
             this.Controls.Add(this.btnRight);
             this.Controls.Add(this.btnLeft);
-            this.Controls.Add(this.btnConnect);
             this.Name = "Form1";
             this.Text = "Drone Panel";
             this.ResumeLayout(false);
@@ -162,8 +185,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.Button btnLeft;
         private System.Windows.Forms.Button btnRight;
         private System.Windows.Forms.Button btnUp;
@@ -171,8 +192,12 @@
         private System.Windows.Forms.Button btnTakeOff;
         private System.Windows.Forms.Button btnLand;
         private System.Windows.Forms.Button btnEmergency;
-        private System.Windows.Forms.Label lblConnection;
         private System.Windows.Forms.Button btnCommand;
+        private System.Windows.Forms.Button btnOn;
+        private System.Windows.Forms.Button btnOff;
+        private System.Windows.Forms.Label lblConnection;
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

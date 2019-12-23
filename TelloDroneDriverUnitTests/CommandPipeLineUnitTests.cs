@@ -1,7 +1,7 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using TelloDroneDriver;
-using TelloDroneDriver.Command;
+using TelloDroneDriver.Manager;
 using TelloDroneDriver.Model;
 
 namespace TelloDroneDriverUnitTests

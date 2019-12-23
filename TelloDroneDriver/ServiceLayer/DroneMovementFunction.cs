@@ -5,7 +5,7 @@ using TelloDroneDriver.Command;
 using TelloDroneDriver.Manager;
 using TelloDroneDriver.Model;
 
-namespace TelloDroneDriver.Functions
+namespace TelloDroneDriver.ServiceLayer
 {
     internal class DroneMovementFeature : BaseDroneFeature
     {
