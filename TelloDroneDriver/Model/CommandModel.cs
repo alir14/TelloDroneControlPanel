@@ -8,9 +8,9 @@ namespace TelloDroneDriver.Model
 
         public DroneCommandEnum Command { get; set; }
 
-        public Coordinate Coordinate { get; set; } = new Coordinate();
+        public Coordinate Coordinate { get; set; } = new Coordinate(0,0,0);
 
-        public Coordinate CurveCoordinate { get; set; } = new Coordinate();
+        public Coordinate CurveCoordinate { get; set; } = new Coordinate(0,0,0);
 
         public int SpeedValue { get; set; }
 
